@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Breed } from '../types/breedCardsTypes';
+import { Breed } from '@/types/breedCardsTypes';
 
 export interface FetchState {
   breeds: Array<Breed> | null;
@@ -39,8 +39,8 @@ const useLoadBreeds = (): FetchState => {
         setCatBreeds(breeds => [...breeds, ...catBreeds]);
         setDogBreeds(breeds => [...breeds, ...dogBreeds]);
 
-      } catch (err: Error | unknown) {
-        if (err instanceof Error) setError(err.message);
+      } catch (error: Error | unknown) {
+        if (error instanceof Error) setError(error.message);
       } finally {
         setLoading(false);
       }

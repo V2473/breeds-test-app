@@ -1,7 +1,7 @@
 import React from 'react';
-import useLoadBreeds from './hooks/useLoadBreeds';
-import BreedCard from './breedCard';
-import { Breed } from './types/breedCardsTypes';
+import useLoadBreeds from '@/hooks/useLoadBreeds';
+import BreedCard from '@/components/breedCard';
+import { Breed } from '@/types/breedCardsTypes';
 
 interface BreedCardsProps {
   cardsCount: number;
@@ -25,7 +25,7 @@ const BreedDeck: React.FC<BreedCardsProps> = ({cardsCount}) => {
     }
 
   return (
-    <div>
+    <div className="breed-deck flex flex-wrap gap-4 items-center justify-center p-4 bg-gray-200">
       {randomBreedsDeck.map((breed, index) => (
         <BreedCard key={`${breed.name}-${index}`} breed={breed} /> 
       ))}
