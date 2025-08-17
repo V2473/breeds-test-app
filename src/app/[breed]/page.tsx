@@ -48,7 +48,7 @@ export default function BreedPage({params}: {params: Promise<{ breed: string }>
     }, []);
 
     useEffect(() => {
-      const fetchBreedImage = async () => {
+      const fetchBreedImageUrls = async () => {
          try {
         const imgLinksResponse = await fetch(imgUrl)
         if (!imgLinksResponse.ok) { throw new Error(`Failed to fetch breed image, ${imgLinksResponse.status}`); } 
@@ -57,7 +57,7 @@ export default function BreedPage({params}: {params: Promise<{ breed: string }>
       }
         catch (error: Error | unknown) { if (error instanceof Error) console.error('Error fetching breed image:', error); }
       };
-      fetchBreedImage();
+      fetchBreedImageUrls();
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
    
