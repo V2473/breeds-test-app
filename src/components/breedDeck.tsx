@@ -7,7 +7,10 @@ interface BreedCardsProps {
   initialBreeds: Breed[] | null;
 }
 
-const BreedDeck: React.FC<BreedCardsProps> = ({ cardsCount, initialBreeds }) => {
+const BreedDeck: React.FC<BreedCardsProps> = ({
+  cardsCount,
+  initialBreeds,
+}) => {
   if (!initialBreeds) {
     return <div>Loading breeds...</div>;
   }

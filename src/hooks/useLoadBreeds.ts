@@ -20,25 +20,30 @@ const useLoadBreeds = (): FetchState => {
         const [responseCatBreeds, responseDogBreeds] = await Promise.all([
           fetch('https://api.thecatapi.com/v1/breeds', {
             headers: {
-            'x-api-key': process.env.CAT_API_KEY || '',
+              'x-api-key': process.env.CAT_API_KEY || '',
             },
           }),
           fetch('https://api.thedogapi.com/v1/breeds', {
             headers: {
-            'x-api-key': process.env.DOG_API_KEY || '',
-            }
+              'x-api-key': process.env.DOG_API_KEY || '',
+            },
           }),
         ]);
 
-        if (!responseCatBreeds.ok) throw new Error(`Failed to fetch Cat API breeds, ${responseCatBreeds.status}`);
-        if (!responseDogBreeds.ok) throw new Error(`Failed to fetch Dog API breeds, ${responseDogBreeds.status}`);
+        if (!responseCatBreeds.ok)
+          throw new Error(
+            `Failed to fetch Cat API breeds, ${responseCatBreeds.status}`,
+          );
+        if (!responseDogBreeds.ok)
+          throw new Error(
+            `Failed to fetch Dog API breeds, ${responseDogBreeds.status}`,
+          );
 
         const catBreeds = await responseCatBreeds.json();
         const dogBreeds = await responseDogBreeds.json();
 
-        setCatBreeds(breeds => [...breeds, ...catBreeds]);
-        setDogBreeds(breeds => [...breeds, ...dogBreeds]);
-
+        setCatBreeds((breeds) => [...breeds, ...catBreeds]);
+        setDogBreeds((breeds) => [...breeds, ...dogBreeds]);
       } catch (error: Error | unknown) {
         if (error instanceof Error) setError(error.message);
       } finally {
@@ -49,17 +54,21 @@ const useLoadBreeds = (): FetchState => {
   }, []);
 
   useEffect(() => {
-    catBreeds.forEach((breed) => {breed.isCat = true;});
-    dogBreeds.forEach((breed) => {breed.isCat = false;});
+    catBreeds.forEach((breed) => {
+      breed.isCat = true;
+    });
+    dogBreeds.forEach((breed) => {
+      breed.isCat = false;
+    });
     setBreeds([...catBreeds, ...dogBreeds]);
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [loading]);
 
   if (breeds.length !== 0 && !loading) {
-    return {breeds, loading, error};
+    return { breeds, loading, error };
   }
-  return {breeds: null, loading, error};
+  return { breeds: null, loading, error };
 };
 
 export default useLoadBreeds;

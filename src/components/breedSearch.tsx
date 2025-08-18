@@ -12,8 +12,8 @@ const BreedSearch: React.FC<BreedSearchProps> = ({ breeds, onSearch }) => {
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newQuery = event.target.value;
     setQuery(newQuery);
-    const filtered = breeds.filter(breed =>
-      breed.name.toLowerCase().includes(newQuery.toLowerCase())
+    const filtered = breeds.filter((breed) =>
+      breed.name.toLowerCase().includes(newQuery.toLowerCase()),
     );
     onSearch(filtered);
   };
